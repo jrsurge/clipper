@@ -27,3 +27,4 @@ TODO
 * Add helpfiles
 * Playhead doesn't update properly - the longer the selection the further out it gets
 * Add ability to delete clips from clip list
+* Add ability to rename clips - requires rethinking the ListView/Dictionary lookup
