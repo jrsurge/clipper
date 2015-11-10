@@ -110,21 +110,22 @@ Clipper{
 
 	prUpdatePlayhead{ | start, range |
 		prPlayHeadRoutine = Routine({
-			var updateRes = 0.01;
+			var updateRes = 0.01*(range/44100);
 			var updateRatio = 44100 * updateRes;
 			var numUpdates, remainder;
 
 			prSoundFileView.timeCursorPosition_(start);
 
-			numUpdates = (range/updateRatio.asFloat -1);
-			remainder = (range/updateRatio.asFloat -1) - numUpdates;
+
+			numUpdates = range/updateRatio;
+			remainder = numUpdates - numUpdates.floor;
+
 
 			(numUpdates).do({
-				prSoundFileView.timeCursorPosition_(prSoundFileView.timeCursorPosition + updateRatio + remainder);
 				(updateRes).wait;
+				prSoundFileView.timeCursorPosition_(prSoundFileView.timeCursorPosition + updateRatio + (remainder/numUpdates).ceil);
 			});
 			prSoundFileView.timeCursorPosition_(start);
-			prSynth.isPlaying_(false);
 		});
 		AppClock.play(prPlayHeadRoutine);
 	}
