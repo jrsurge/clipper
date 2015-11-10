@@ -25,12 +25,17 @@ Clipper{
 			Button()
 			.states_([["Write selected clips to file"]])
 			.action_({
-				Dialog.savePanel({ | path |
-					prClipListView.selection.do({ | v |
-						var selection = prClipList[prClipListView.items[v]];
-						prBuffer.write(path ++ "-" ++ selection[0] ++ "_" ++ selection[1] ++ ".wav","wav","int24",selection[1],selection[0]);
+				if(prClipListView.selection.size > 0) {
+					Dialog.savePanel({ | path |
+						prClipListView.selection.do({ | v |
+							var selection = prClipList[prClipListView.items[v]];
+							prBuffer.write(path ++ "-" ++ selection[0] ++ "_" ++ selection[1] ++ ".wav","wav","int24",selection[1],selection[0]);
+						});
 					});
-				});
+				}
+				{
+					"WARNING: No clips selected".postln;
+				}
 			})
 		);
 
