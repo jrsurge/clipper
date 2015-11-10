@@ -19,7 +19,7 @@ Clipper{
 		this.prSoundFileViewInit;
 
 		prLayout.add(
-			DragSink().action_({ | v |
+			DragSink().value_(prSoundFile).action_({ | v |
 				prSoundFile = v.value;
 				this.prSoundFileInit(prSoundFile);
 			}).minHeight_(50)
