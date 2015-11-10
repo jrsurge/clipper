@@ -6,7 +6,7 @@ Clipper{
 	}
 
 	init{
-		prWin = Window("Clipper").onClose_({ prBuffer.free; prClipList.clear; if(prSynth.isPlaying) {prSynth.free; AppClock.clear}; });
+		prWin = Window("Clipper").onClose_({ prBuffer.free; prClipList.free; if(prSynth.isPlaying) {prSynth.free; AppClock.clear}; });
 		prLayout = VLayout();
 
 		prSoundFileView = SoundFileView();
