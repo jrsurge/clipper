@@ -12,13 +12,20 @@ Clipper{
 		prSoundFileView = SoundFileView();
 
 		this.prSynthDefInit;
-		this.prSoundFileInit(prSoundFile);
+		if(prSoundFile != "") {this.prSoundFileInit(prSoundFile)};
 		this.prSoundFileViewInit;
 		this.prClipListViewInit;
 
 		prClipList = Dictionary();
 
-		prLayout.add(prSoundFileView);
+		prLayout.add(
+			DragSink().action_({ | v |
+				prSoundFile = v.value;
+				this.prSoundFileInit(prSoundFile);
+			}).minHeight_(50)
+		);
+
+		prLayout.add(prSoundFileView.minHeight_(50));
 		prLayout.add(prClipListView);
 
 		prLayout.add(
@@ -48,6 +55,8 @@ Clipper{
 	prSoundFileInit{ | path |
 		prBuffer.free;
 		prClipList.clear;
+		prSoundFileView.setSelection(0,[0,0]);
+		prSoundFileView.timeCursorPosition_(0);
 		SoundFile.use(path,{ |file|
 			if(file.isOpen){
 				prSoundFileView
@@ -57,7 +66,7 @@ Clipper{
 				prBuffer.bufnum;
 			}
 			{
-				MethodError("Cannot open file:" + path).throw;
+				("WARNING: Cannot open soundfile" + path).postln;
 			}
 		})
 	}
