@@ -1,25 +1,54 @@
 TITLE:: Clipper
-summary:: (put short description here)
-categories:: Undocumented classes
-related:: Classes/SomeRelatedClass, Reference/SomeRelatedStuff, etc.
+summary:: A UI for creating clips from soundfiles
+categories:: GUI
+related:: Classes/Buffer, Classes/SoundFileView
 
 DESCRIPTION::
-(put long description here)
+Inspired by the ProTools clip export system, Clipper creates a UI for quickly creating and exporting clips from soundfiles.
 
+SUBSECTION:: Usage
+LIST::
+## You can drag and drop a soundfile into the DragSink at the top to load in a soundfile at any time (although avoid changing while playing back)
+## Left-clicking in the SoundFileView will change time pointer
+## Left-clicking and dragging in the SoundFileView will create a selection
+## Pressing STRONG::spacebar:: will toggle playback of the current selection
+## Shift-Right-Clicking and dragging in the SoundFileView will allow you to zoom in and move around
+## STRONG::To make a clip -:: with your selection made, press STRONG::e::
+## STRONG::To export clip list-:: using the ListView, select all the clips you want to export, and press the EMPHASIS::"Write selected clips to file":: button. WARNING::Make a folder to put all the clips in, STRONG::don't specify a full filename:: - the name you give here is used as a prefix for the output files::
+## Clicking a clip from the list will select that clip
+## Pressing enter in the SoundFileView will reset the time pointer to the beginning of the file
+::
 
 CLASSMETHODS::
 
 METHOD:: new
-(describe method here)
+Create a new Clipper UI
 
 ARGUMENT:: file
-(describe argument here)
-
-returns:: (describe returnvalue here)
+A path to an initial soundfile to load
 
 
 INSTANCEMETHODS::
+NOTE::
+All instance methods are private
+::
+PRIVATE:: prUpdatePlayhead
 
+PRIVATE:: prSoundFileViewInit
+
+PRIVATE:: prAddClip
+
+PRIVATE:: prSoundFileInit
+
+PRIVATE:: prSynthDefInit
+
+PRIVATE:: playCurrentSelection
+
+PRIVATE:: prClipListViewInit
+
+PRIVATE:: updateClipListView
+
+PRIVATE:: updateCurrentSelection
 
 EXAMPLES::
 
