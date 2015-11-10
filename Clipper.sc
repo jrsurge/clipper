@@ -152,7 +152,6 @@ Clipper{
 		var range = prSoundFileView.selections[0][1];
 
 		if(prSynth.isPlaying) { prSynth.free; AppClock.clear(); prSoundFileView.timeCursorPosition_(start)} {
-
 			if(range == 0)
 			{
 				range = prBuffer.numFrames - start;
@@ -161,11 +160,12 @@ Clipper{
 			if(prBuffer.numChannels == 2)
 			{
 				prSynth = Synth(\jrs_clipperSynth_stereo, [\buffer, prBuffer, \start, start, \range, range]);
+				NodeWatcher.register(prSynth);
 			}
 			{
 				prSynth = Synth(\jrs_clipperSynth_mono, [\buffer, prBuffer, \start, start, \range, range]);
+				NodeWatcher.register(prSynth);
 			};
-			prSynth.isPlaying_(true);
 			this.prUpdatePlayhead(start,range);
 		}
 	}
