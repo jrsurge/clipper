@@ -34,7 +34,7 @@ Clipper{
 			})
 		);
 
-		prLayout.add(nil);
+		//prLayout.add(nil);
 
 		prWin.layout_(prLayout);
 		prWin.front();
