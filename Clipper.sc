@@ -11,12 +11,12 @@ Clipper{
 
 		prSoundFileView = SoundFileView();
 
+		prClipList = Dictionary();
+		this.prClipListViewInit;
+
 		this.prSynthDefInit;
 		if(prSoundFile != "") {this.prSoundFileInit(prSoundFile)};
 		this.prSoundFileViewInit;
-		this.prClipListViewInit;
-
-		prClipList = Dictionary();
 
 		prLayout.add(
 			DragSink().action_({ | v |
