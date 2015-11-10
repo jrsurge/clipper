@@ -46,8 +46,6 @@ Clipper{
 			})
 		);
 
-		//prLayout.add(nil);
-
 		prWin.layout_(prLayout);
 		prWin.front();
 	}
@@ -63,7 +61,6 @@ Clipper{
 				.soundfile_(file)
 				.readWithTask(0,file.numFrames,512,{},true);
 				prBuffer = file.asBuffer(Server.default);
-				prBuffer.bufnum;
 			}
 			{
 				("WARNING: Cannot open soundfile" + path).postln;
