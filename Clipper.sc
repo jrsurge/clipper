@@ -44,12 +44,17 @@ Clipper{
 		prBuffer.free;
 		prClipList.clear;
 		SoundFile.use(path,{ |file|
-			prSoundFileView
-			.soundfile_(file)
-			.readWithTask(0,file.numFrames,512,{},true);
-			prBuffer = file.asBuffer(Server.default);
-			prBuffer.bufnum;
-		});
+			if(file.isOpen){
+				prSoundFileView
+				.soundfile_(file)
+				.readWithTask(0,file.numFrames,512,{},true);
+				prBuffer = file.asBuffer(Server.default);
+				prBuffer.bufnum;
+			}
+			{
+				MethodError("Cannot open file:" + path).throw;
+			}
+		})
 	}
 
 	prSoundFileViewInit{
