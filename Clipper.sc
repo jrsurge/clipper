@@ -87,8 +87,7 @@ Clipper{
 			case
 			{keycode == 32} { this.playCurrentSelection; }
 			{keycode == 13} { caller.timeCursorPosition_(0); caller.setSelection(0,[0,0]); }
-			{keycode == 101} {
-				this.prAddClip(start,range) }
+			{keycode == 101} { this.prAddClip(start,range); }
 			;
 		})
 		;
