@@ -72,6 +72,7 @@ Clipper{
 	prSoundFileInit{ | path |
 		prClipList.clear;
 		this.updateClipListView;
+		prClipNotes.string_("");
 		prSoundFileView.setSelection(0,[0,0]);
 		prSoundFileView.timeCursorPosition_(0);
 		SoundFile.use(path,{ |file|
