@@ -1,5 +1,5 @@
 Clipper{
-	var prSoundFile, prBuffer, prWin, prSynth, prLayout, prSoundFileView, prPlayHeadRoutine, prClipList, prClipListView;
+	var prSoundFile, prBuffer, prWin, prSynth, prLayout, prSoundFileView, prPlayHeadRoutine, prClipList, prClipListView, prClipNotes;
 
 	*new{ | file="" |
 		^super.newCopyArgs(file).init;
@@ -25,8 +25,17 @@ Clipper{
 			}).minHeight_(50)
 		);
 
+		prClipNotes = TextView().focusLostAction_({| v |
+			if(prClipListView.selection.size != 0)
+			{
+				prClipList[prClipListView.items[prClipListView.selection[0]]][2] = v.string;
+			};
+		});
+
 		prLayout.add(prSoundFileView.minHeight_(50));
-		prLayout.add(prClipListView);
+		prLayout.add(
+			HLayout().add(prClipListView).add(prClipNotes);
+		);
 
 		prLayout.add(
 			Button()
@@ -37,6 +46,12 @@ Clipper{
 						prClipListView.selection.do({ | v |
 							var selection = prClipList[prClipListView.items[v]];
 							prBuffer.write(path ++ "-" ++ selection[0] ++ "_" ++ selection[1] ++ ".wav","wav","int24",selection[1],selection[0]);
+							if(selection[2] != "")
+							{
+								File.use(path ++ "-" ++ selection[0] ++ "_" ++ selection[1] ++ "-notes.txt","w",{|file|
+									file.write(selection[2]);
+								});
+							};
 						});
 					});
 				}
@@ -147,7 +162,7 @@ Clipper{
 	}
 
 	prAddClip{ | start, range |
-		prClipList.add(\clip++start++"_"++range -> [start,range]);
+		prClipList.add(\clip++start++"_"++range -> [start,range,""]);
 		this.updateClipListView;
 	}
 
@@ -161,6 +176,7 @@ Clipper{
 		selection = prClipList[key];
 		prSoundFileView.setSelection(0,selection);
 		prSoundFileView.timeCursorPosition_(selection[0]);
+		prClipNotes.string_(selection[2]);
 	}
 
 	playCurrentSelection{
