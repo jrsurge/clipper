@@ -14,19 +14,6 @@ Clipper{
 		prClipList = Dictionary();
 		this.prClipListViewInit;
 
-		this.prSynthDefInit;
-		if(prSoundFile != "") {this.prSoundFileInit(prSoundFile)};
-		this.prSoundFileViewInit;
-
-		prLayout.add(
-			DragSink().value_(prSoundFile).action_({ | v |
-				prSoundFile = v.value;
-				this.prSoundFileInit(prSoundFile);
-			}).minHeight_(50)
-		);
-
-		prLastSelectedClip = "";
-
 		prClipNotes = TextView()
 		.focusGainedAction_({
 			if(prClipListView.selection.size != 0)
@@ -46,6 +33,19 @@ Clipper{
 				}
 			};
 		});
+
+		this.prSynthDefInit;
+		if(prSoundFile != "") {this.prSoundFileInit(prSoundFile)};
+		this.prSoundFileViewInit;
+
+		prLayout.add(
+			DragSink().value_(prSoundFile).action_({ | v |
+				prSoundFile = v.value;
+				this.prSoundFileInit(prSoundFile);
+			}).minHeight_(50)
+		);
+
+		prLastSelectedClip = "";
 
 		prLayout.add(prSoundFileView.minHeight_(50));
 		prLayout.add(
