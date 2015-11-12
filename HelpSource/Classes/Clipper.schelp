@@ -4,6 +4,7 @@ categories:: GUI
 related:: Classes/Buffer, Classes/SoundFileView
 
 DESCRIPTION::
+WARNING::Still in development - note taking untested::
 Inspired by the ProTools clip export system, Clipper creates a UI for quickly creating and exporting clips from soundfiles.
 
 SUBSECTION:: Usage
