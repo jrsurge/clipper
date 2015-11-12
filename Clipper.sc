@@ -1,5 +1,5 @@
 Clipper{
-	var prSoundFile, prBuffer, prWin, prSynth, prLayout, prSoundFileView, prPlayHeadRoutine, prClipList, prClipListView, prClipNotes;
+	var prSoundFile, prBuffer, prWin, prSynth, prLayout, prSoundFileView, prPlayHeadRoutine, prClipList, prClipListView, prClipNotes, prLastSelectedClip;
 
 	*new{ | file="" |
 		^super.newCopyArgs(file).init;
@@ -25,10 +25,14 @@ Clipper{
 			}).minHeight_(50)
 		);
 
-		prClipNotes = TextView().focusLostAction_({| v |
+		prClipNotes = TextView()
+		.focusGainedAction_({
+			prLastSelectedClip = prClipListView.items[prClipListView.selection[0]];
+		})
+		.focusLostAction_({| v |
 			if(prClipListView.selection.size != 0)
 			{
-				prClipList[prClipListView.items[prClipListView.selection[0]]][2] = v.string;
+				prClipList[prLastSelectedClip][2] = v.string;
 			};
 		});
 

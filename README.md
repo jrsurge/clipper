@@ -5,8 +5,6 @@ A SuperCollider utility class for quickly clipping out sounds from soundfiles.
 
 Released under GPL v.3.
 
-WARNING: still in development. Some features (like notes) aren't finished yet
-
 What?
 -----
 
@@ -26,7 +24,7 @@ How?
 
 TODO
 ----
-* Fix note taking - very buggy + untested
+* Test note taking (multiple selections while editing etc.)
 * Playhead doesn't update properly - the longer the selection the further out it gets
 * Add ability to delete clips from clip list
 * Add ability to rename clips - requires rethinking the ListView/Dictionary lookup
