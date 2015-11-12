@@ -25,14 +25,25 @@ Clipper{
 			}).minHeight_(50)
 		);
 
+		prLastSelectedClip = "";
+
 		prClipNotes = TextView()
 		.focusGainedAction_({
-			prLastSelectedClip = prClipListView.items[prClipListView.selection[0]];
+			if(prClipListView.selection.size != 0)
+			{
+				prLastSelectedClip = prClipListView.items[prClipListView.selection[0]];
+			}
+			{
+				prLastSelectedClip = "";
+			}
 		})
 		.focusLostAction_({| v |
 			if(prClipListView.selection.size != 0)
 			{
-				prClipList[prLastSelectedClip][2] = v.string;
+				if(prLastSelectedClip != "")
+				{
+					prClipList[prLastSelectedClip][2] = v.string;
+				}
 			};
 		});
 
